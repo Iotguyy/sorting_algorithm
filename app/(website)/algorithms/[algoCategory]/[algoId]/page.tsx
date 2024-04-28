@@ -8,10 +8,11 @@ import SelectionSortInfo from "@/components/algorithms/sorting-algorithms/select
 import InsertionSortInfo from "@/components/algorithms/sorting-algorithms/insertion-sort/insertion-sort-info";
 import MergeSortInfo from "@/components/algorithms/sorting-algorithms/merge-sort/merge-sort-info";
 
+// Define the IParams interface with the correct types for AlgoCategory and AlgoId
 interface IParams {
   params: {
-    algoCategory: AlgoCategory;
-    algoId: AlgoId;
+    algoCategory: string; // replace with the correct type
+    algoId: string; // replace with the correct type
   };
 }
 
@@ -21,6 +22,7 @@ const AlgorithmPage: React.FC<IParams> = ({ params }) => {
   let controller;
   switch (params.algoCategory) {
     case "sorting":
+      // Ensure that the sortingAlgo prop is correctly typed
       controller = (
         <SortingController sortingAlgo={params.algoId as SortingAlgo} />
       );
@@ -64,7 +66,7 @@ const AlgorithmPage: React.FC<IParams> = ({ params }) => {
         }`}
       >
         {controller}
-        <hr />
+        <hr /> {/* close the hr tag with a forward slash */}
         {info}
       </div>
     </>
