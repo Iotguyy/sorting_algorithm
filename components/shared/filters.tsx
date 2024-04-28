@@ -47,12 +47,12 @@ export const filtersArr: Filter[] = [
     name: "Merge Sort",
     icon: GitMerge,
   },
-  {
-    id: "soon",
-    route: "",
-    name: "More Soon!",
-    icon: ListPlus,
-  },
+  // {
+  //   id: "soon",
+  //   route: "",
+  //   name: "More Soon!",
+  //   icon: ListPlus,
+  // },
   // {
   //   id: "quick-sort",
   //   route: "/algorithms/sorting/quick-sort",
