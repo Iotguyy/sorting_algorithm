@@ -1,16 +1,26 @@
-import { generateStaticParams } from './generateStaticParams'
-import AlgorithmPage from './AlgorithmPage'
+import { capitalize } from "@/lib/utils";
 
 interface IParams {
   params: {
-    algoCategory: string;
-    algoId: string;
+    algoCategory: AlgoCategory;
+    algoId: AlgoId;
   };
 }
 
-const AlgorithmsLayout: React.FC<IParams> = ({ params }) => {
-  return <AlgorithmPage params={params} />
+export async function generateMetadata({ params }: IParams) {
+  const algoName = capitalize(params.algoId.replace("-", " "));
+  const title = `${algoName} Visualization`;
+  const description = `${algoName} algorithm visualization and simulation`;
+
+  return { title, description };
 }
 
-export { generateStaticParams }
-export default AlgorithmsLayout
+const AlgorithmsLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="flex flex-col pt-navbar mb-12 lg:mb-20 w-full">
+      {children}
+    </div>
+  );
+};
+
+export default AlgorithmsLayout;
