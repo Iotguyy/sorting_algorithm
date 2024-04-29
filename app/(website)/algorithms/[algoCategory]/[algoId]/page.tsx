@@ -9,68 +9,27 @@ import InsertionSortInfo from "@/components/algorithms/sorting-algorithms/insert
 import MergeSortInfo from "@/components/algorithms/sorting-algorithms/merge-sort/merge-sort-info";
 
 // Define the IParams interface with the correct types for AlgoCategory and AlgoId
-interface IParams {
-  params: {
-    algoCategory: string; // replace with the correct type
-    algoId: string; // replace with the correct type
-  };
+export async function generateStaticParams() {
+  // Fetch your data source, for example, a list of algorithms
+  const data = await fetchData('/api/algorithms'); // Replace with your actual data fetching logic
+
+  // Map your data to params
+  return data.map(item => {
+    return {
+      params: {
+        algoCategory: item.category,
+        algoId: item.id
+      }
+    };
+  });
 }
 
-const AlgorithmPage: React.FC<IParams> = ({ params }) => {
-  const filters = useFilters();
+// This function will be called by Next.js to render the page at the paths returned by generateStaticParams
+export default function AlgorithmPage({ params }) {
+  // You can use the params to fetch data specific to that page or pass it to the page component
+  const { algoCategory, algoId } = params;
+  // ...
+}
 
-  let controller;
-  switch (params.algoCategory) {
-    case "sorting":
-      // Ensure that the sortingAlgo prop is correctly typed
-      controller = (
-        <SortingController sortingAlgo={params.algoId as SortingAlgo} />
-      );
-      break;
-
-    case "searching":
-      break;
-
-    default:
-      controller = null;
-  }
-
-  let info;
-  switch (params.algoId) {
-    case "bubble-sort":
-      info = <BubbleSortInfo />;
-      break;
-
-    case "selection-sort":
-      info = <SelectionSortInfo />;
-      break;
-
-    case "insertion-sort":
-      info = <InsertionSortInfo />;
-      break;
-
-    case "merge-sort":
-      info = <MergeSortInfo />;
-      break;
-
-    default:
-      info = null;
-  }
-
-  return (
-    <>
-      <Filters />
-      <div
-        className={`flex flex-col gap-y-12 mt-6 lg:mt-10 ${
-          filters.isOpen && "pt-filters"
-        }`}
-      >
-        {controller}
-        <hr /> {/* close the hr tag with a forward slash */}
-        {info}
-      </div>
-    </>
-  );
-};
 
 export default AlgorithmPage;
