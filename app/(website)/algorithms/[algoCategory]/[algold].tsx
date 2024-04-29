@@ -1,7 +1,16 @@
 export async function generateStaticParams() {
   // Fetch your data source, for example, a list of algorithms
-  const data = await fetchData('/api/algorithms'); // Replace with your actual data fetching logic
+  const response = await fetch('https://your-api-url.com/algorithms'); // Replace with your actual API URL
+  const data = await response.json();
 
+  // Map your data to params
+  return data.map(item => {
+    return {
+      algoCategory: item.category,
+      algoId: item.id,
+    }
+  });
+}
   // Map your data to params
   return data.map(item => {
     return {
