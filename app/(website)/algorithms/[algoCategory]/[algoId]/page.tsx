@@ -32,4 +32,3 @@ export default function AlgorithmPage({ params }) {
 }
 
 
-export default AlgorithmPage;
